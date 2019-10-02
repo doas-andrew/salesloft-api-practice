@@ -26,7 +26,7 @@ export default class PeopleTable extends React.Component {
 
 	compare = (a,b) => {
 		let attr = this.state.sort
-		
+
 		if ( a[attr] < b[attr] ) return this.state.order
 		else if ( a[attr] > b[attr] ) return this.state.order * -1
 		else return 0 
@@ -39,9 +39,9 @@ export default class PeopleTable extends React.Component {
 		if (category.attribute === this.state.sort) {
 			className += "active-col"
 			if (this.state.order === -1)
-				icon = <UpArrow/>
+				icon = <UpArrow className="svg-align" />
 			else
-				icon = <DownArrow/>
+				icon = <DownArrow className="svg-align" />
 		}
 
 		return (
@@ -71,10 +71,12 @@ export default class PeopleTable extends React.Component {
 			this.setState({ sort: column, order: -1 })
 	}
 
+	getClassName = ()=> this.props.darkMode ? "people-table table-dark" : "people-table"
+
 
 	render() {
 		return (
-			<Table striped className="people-table">
+			<Table striped hover className={this.getClassName()} style={{ transition: "1s" }}>
 				<thead className="table-head">
 					<tr>
 					{ categories.map(this.renderTableHeading) }

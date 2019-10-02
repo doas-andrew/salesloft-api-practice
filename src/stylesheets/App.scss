@@ -3,10 +3,9 @@ $blue: rgb(40, 151, 211);
 .App {
   text-align: center;
   min-height: 100vh;
-}
 
-.no-wrap {
-	white-space: nowrap;
+	background-color: white;
+  transition: background-color 1s;
 }
 
 .banner {
@@ -14,12 +13,13 @@ $blue: rgb(40, 151, 211);
   margin-top: 50px;
 }
 
-.sort-form {
+.options-container {
   display: inline-block;
-  text-align: left;
+  text-align: center;
 
+  min-width: 250px;
   margin: 80px 0;
-  padding: 20px;
+  padding: 20px 50px;
 
   background-color: rgb(222,222,222);
   border: 2px solid $blue;
@@ -50,11 +50,18 @@ $blue: rgb(40, 151, 211);
 	}
 }
 
-.table-body {
-	text-align: left;
+.svg-align {
+  display: inline-flex;
+  position: relative;
+  top: -0.10rem;
 }
 
-.table-heading {
+.people-table {
+	// text-align: left;
+
+}
+
+.table-head {
 	cursor: pointer;
 }
 

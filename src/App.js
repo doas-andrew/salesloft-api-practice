@@ -2,6 +2,7 @@ import React from 'react';
 import PeopleTable from './components/PeopleTable'
 import { key } from './api_key';
 import { proxy_url, SL_People_url } from './constants';
+import { IoIosArrowForward as NextArrow, IoIosArrowBack as PrevArrow } from 'react-icons/io'
 import SalesLoft_banner from './images/SalesLoft_banner.png'
 import './stylesheets/App.scss';
 
@@ -13,13 +14,17 @@ export default class App extends React.Component {
     page: 1,
     next_page: null,
     per_page: 50,
-    sort_by: "created_at",
-    sort_direction: "ASC",
-    showCharStats: false
+
+    showCharStats: false,
+    darkMode: false
   }
 
   componentDidMount() {
     // this.fetchPeople()
+  }
+
+  toggleDarkMode = ()=> {
+    this.setState({ darkMode: !this.state.darkMode })
   }
 
   fetchPeople = () => {
@@ -27,9 +32,7 @@ export default class App extends React.Component {
       proxy_url,
       SL_People_url,
       `?page=${this.state.page}`,
-      `&per_page=${this.state.per_page}`,
-      `&sort_by=${this.state.sort_by}`,
-      `&sort_direction=${this.state.sort_direction}`
+      `&per_page=${this.state.per_page}`
     ].join('')
 
     fetch(full_url, {
@@ -52,47 +55,44 @@ export default class App extends React.Component {
     })
   }
 
+  getStyle = () => ( this.state.darkMode ? { backgroundColor: "black" } : {} )
+
   handleChange = e => this.setState({ [e.target.name]: e.target.value })
-  handleSubmit = e => {
-    e.preventDefault()
-    this.setState({ showCharStats: false })
+
+  refetch = () => {
+    this.setState({ page: 1, showCharStats: false })
     this.fetchPeople()
   }
 
+  fetchPage = increment => {
+    this.setState({ page: this.state.page + increment })
+    this.fetchPeople()
+  }
 
   render() {
     return (
-      <div className="App">
+      <div className="App" style={this.getStyle()}>
         <img className="banner" src={SalesLoft_banner} alt="SalesLoft-Banner" draggable="false" />
         <br/>
-        <form className="sort-form" onSubmit={this.handleSubmit}>
 
-          <label>Sort By</label>
-          <select name="sort_by" className="select" value={this.state.sort_by} onChange={this.handleChange}>
-            <option value="created_at">Date of Entry (ID)</option>
-            <option value="updated_at">Date of last Update</option>
-            <option value="last_contacted_at">Date of Last Contact</option>
-          </select>
+        <div className="options-container">
+          <button type="button" onClick={this.toggleDarkMode}>{this.state.darkMode ? "Disable" : "Enable"} Dark Mode</button>
           <br/>
-          <label>Order</label>
-          <select name="sort_direction" className="select" value={this.state.sort_direction} onChange={this.handleChange}>
-            <option value="ASC">Ascending (small to large)</option>
-            <option value="DESC">Descending (large to small)</option>
-          </select>
-          <br/>
-          
-          <div className="center-contents">
-            <label>{ this.state.per_page } items per page</label>
-            <br/>
-            <input type="range" name="per_page" min="1" max="100" value={this.state.per_page} onChange={this.handleChange} />
-          </div>
 
-          <div className="center-contents">
-            <button className="blue-btn submit" type="submit">Apply Sorting Options</button>
-          </div>
-        </form>
-        <br/>
-        <PeopleTable people={this.state.people}/>
+          <label>{ this.state.per_page } items per page</label>
+          <br/>
+          <input type="range" name="per_page" min="1" max="100" value={this.state.per_page} onChange={this.handleChange}/>
+
+          <br/>
+          <button className="blue-btn submit" onClick={this.refetch}>Fetch!</button>
+        </div>
+
+        <div className="page-btn-container">
+          <button onClick={()=> this.fetchPage(-1)} disabled={ this.state.page <= 1 }><PrevArrow/></button>
+          <button onClick={()=> this.fetchPage(+1)} disabled={!this.state.next_page }><NextArrow/></button>
+        </div>
+
+        <PeopleTable darkMode={this.state.darkMode} people={this.state.people}/>
       </div>
     )
   }

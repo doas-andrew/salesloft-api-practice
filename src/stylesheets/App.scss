@@ -1,0 +1,45 @@
+$blue: rgb(40, 151, 211);
+
+.App {
+  text-align: center;
+  min-height: 100vh;
+}
+
+.banner {
+  max-width: 30vw;
+  margin: 50px;
+}
+
+.sort-form {
+  display: inline-block;
+  text-align: left;
+  padding: 20px;
+
+  background-color: rgb(222,222,222);
+  border: 2px solid $blue;
+  border-radius: 4px 24px 4px 24px;
+}
+
+.select {
+	margin: 10px;
+}
+
+.center-contents {
+	margin-top: 10px;
+	text-align: center;
+}
+
+.blue-btn {
+	color: white;
+  background-color: $blue;
+  border-radius: 4px;
+	transition: 0.10s;
+
+	&:active {
+		color: $blue;
+		background-color: white;
+	}
+	&:focus {
+		outline: none;
+	}
+}

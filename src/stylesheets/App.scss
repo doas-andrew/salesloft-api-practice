@@ -5,14 +5,20 @@ $blue: rgb(40, 151, 211);
   min-height: 100vh;
 }
 
+.no-wrap {
+	white-space: nowrap;
+}
+
 .banner {
-  max-width: 30vw;
-  margin: 50px;
+  max-width: 40vw;
+  margin-top: 50px;
 }
 
 .sort-form {
   display: inline-block;
   text-align: left;
+
+  margin: 80px 0;
   padding: 20px;
 
   background-color: rgb(222,222,222);
@@ -42,4 +48,16 @@ $blue: rgb(40, 151, 211);
 	&:focus {
 		outline: none;
 	}
+}
+
+.table-body {
+	text-align: left;
+}
+
+.table-heading {
+	cursor: pointer;
+}
+
+.active-col {
+	color: $blue;
 }

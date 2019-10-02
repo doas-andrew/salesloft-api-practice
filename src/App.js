@@ -1,11 +1,12 @@
 import React from 'react';
+import PeopleTable from './components/PeopleTable'
 import { key } from './api_key';
 import { proxy_url, SL_People_url } from './constants';
 import SalesLoft_banner from './images/SalesLoft_banner.png'
 import './stylesheets/App.scss';
 
 
-class App extends React.Component {
+export default class App extends React.Component {
 
   state = {
     people: [],
@@ -91,9 +92,8 @@ class App extends React.Component {
           </div>
         </form>
         <br/>
+        <PeopleTable people={this.state.people}/>
       </div>
     )
   }
 }
-
-export default App;

@@ -4,6 +4,8 @@ import './stylesheets/bootstrap.min.css';
 import './stylesheets/index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+require('dotenv').config()
+
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

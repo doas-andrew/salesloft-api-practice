@@ -86,7 +86,7 @@ export default class App extends React.Component {
         disabled={!this.state.next_page || this.state.loading }>
           Next&nbsp;<NextArrow className="svg-align"/>
         </button>
-        <div>Page {this.state.page} of { Math.ceil(total_records / this.state.per_page) }</div>
+        <div className="page-count-text">Page {this.state.page} of { Math.ceil(total_records / this.state.per_page) }</div>
       </div>
     )
   }
@@ -112,6 +112,7 @@ export default class App extends React.Component {
       return (
         <Fragment>
           { this.renderFrequencyTableButton() }
+
           { this.renderPageButtons() }
           <ReactLoading className="loading" type="spin" color="#2897D3" width="15%"/>
         </Fragment>

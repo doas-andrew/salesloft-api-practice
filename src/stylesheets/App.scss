@@ -12,7 +12,7 @@ $blue: #2897D3;
 }
 
 .loading {
-	margin: 40px auto;
+	margin: 40px auto 1000px;
 }
 
 .night-mode-btn {
@@ -65,7 +65,7 @@ $blue: #2897D3;
   margin: 50px 0;
   padding: 15px 50px;
 
-  background-color: rgb(222,222,222);
+  background-color: #DEDEDE;
   border: 2px solid $blue;
   border-radius: 4px 24px 4px 24px;
 }
@@ -112,4 +112,8 @@ $blue: #2897D3;
   display: inline-flex;
   position: relative;
   top: -1px;
+}
+
+.page-count-text {
+	color: #808080;
 }

@@ -1,4 +1,4 @@
-$blue: rgb(40, 151, 211);
+$blue: #2897D3;
 
 .App {
   min-height: 100vh;
@@ -9,6 +9,10 @@ $blue: rgb(40, 151, 211);
 
 	background-color: white;
   transition: background-color 1s;
+}
+
+.loading {
+	margin: 40px auto;
 }
 
 .night-mode-btn {
@@ -58,8 +62,8 @@ $blue: rgb(40, 151, 211);
   text-align: center;
 
   min-width: 250px;
-  margin: 80px 0;
-  padding: 20px 50px;
+  margin: 50px 0;
+  padding: 15px 50px;
 
   background-color: rgb(222,222,222);
   border: 2px solid $blue;
@@ -91,12 +95,16 @@ $blue: rgb(40, 151, 211);
 	}
 }
 
+.apply {
+	margin-top: 10px;
+}
+
 .page-btn-container {
 	margin: 20px 0;
 }
 
 .page-btn {
-	margin: 0 5px;
+	margin: 10px;
 	width: 110px;
 }
 

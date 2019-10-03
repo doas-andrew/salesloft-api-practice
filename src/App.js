@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import FrequencyTable from './components/FrequencyTable';
 import PeopleTable from './components/PeopleTable';
 import { key } from './api_key';
-import { proxy_url, SL_People_url } from './constants';
+import { proxy_url, SL_People_url, total_records } from './constants';
 import { IoIosArrowForward as NextArrow, IoIosArrowBack as PrevArrow } from 'react-icons/io';
 import { WiMoonAltWaningCrescent4 as Moon } from "react-icons/wi"
+import ReactLoading from 'react-loading';
 import SalesLoft_banner from './images/SalesLoft_banner.png';
 import './stylesheets/Table.scss';
 import './stylesheets/App.scss';
@@ -13,6 +14,8 @@ import './stylesheets/App.scss';
 export default class App extends React.Component {
 
   state = {
+    loading: false,
+
     people: [],
     page: 1,
     next_page: null,
@@ -25,10 +28,11 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    // this.fetchPeople()
+    this.fetchPeople()
   }
 
   fetchPeople = (pageNum = 1, per_page=this.state.per_page) => {
+    this.setState({ loading: true })
     let full_url = [
       proxy_url,
       SL_People_url,
@@ -48,9 +52,11 @@ export default class App extends React.Component {
     .then(res => {
       if (res.data) {
         this.setState({ 
+          loading: false,
           people: res.data, 
           page: res.metadata.paging.current_page,
-          next_page: res.metadata.paging.next_page
+          next_page: res.metadata.paging.next_page,
+          per_page: res.metadata.paging.per_page
         }) 
       }
     })
@@ -60,9 +66,9 @@ export default class App extends React.Component {
 
   toggleNightMode = () => this.setState({ nightMode: !this.state.nightMode })
 
-  getNMBClass = () => this.state.nightMode ? "night-mode-btn nm-on" : "night-mode-btn nm-off"
+  getNMBClass = () => ( this.state.nightMode ? "night-mode-btn nm-on" : "night-mode-btn nm-off" )
 
-  setNewPerPage = e => this.setState({ new_per_page: e.target.value })
+  changeNewPerPage = e => this.setState({ new_per_page: e.target.value })
 
   renderPageButtons = () => {
     return (
@@ -70,35 +76,29 @@ export default class App extends React.Component {
         <button 
         className="blue-btn page-btn" 
         onClick={()=> this.fetchPeople(this.state.page - 1)} 
-        disabled={ this.state.page <= 1 }>
+        disabled={ this.state.page <= 1 || this.state.loading }>
           <PrevArrow className="svg-align"/>&nbsp;Previous
         </button>
 
         <button 
         className="blue-btn page-btn" 
         onClick={()=> this.fetchPeople(this.state.page + 1)} 
-        disabled={!this.state.next_page }>
+        disabled={!this.state.next_page || this.state.loading }>
           Next&nbsp;<NextArrow className="svg-align"/>
         </button>
+        <div>Page {this.state.page} of { Math.ceil(total_records / this.state.per_page) }</div>
       </div>
     )
-  }
-  
-  changePerPage = e => {
-    e.preventDefault(1, this.state.new_per_page)
-    this.setState({ per_page: this.state.new_per_page })
-    this.fetchPeople()
   }
 
   toggleFrequencyTable = ()=> this.setState({ showFrequencyTable: !this.state.showFrequencyTable })
 
   renderFrequencyTableButton = ()=> {
-    if (this.state.people.length > 0)
-      return (
-        <button className="blue-btn" onClick={this.toggleFrequencyTable}>
-          {this.state.showFrequencyTable ? "Hide" : "Show"} Frequency Table
-        </button>
-      )
+    return (
+      <button className="blue-btn" onClick={this.toggleFrequencyTable} disabled={this.state.loading}>
+        {this.state.showFrequencyTable ? "Hide" : "Show"} Frequency Table
+      </button>
+    )
   }
   renderFrequencyTable = ()=> {
     if (this.state.showFrequencyTable)
@@ -107,10 +107,32 @@ export default class App extends React.Component {
       return null
   }
 
+  getTables = ()=> {
+    if (this.state.loading)
+      return (
+        <Fragment>
+          { this.renderFrequencyTableButton() }
+          { this.renderPageButtons() }
+          <ReactLoading className="loading" type="spin" color="#2897D3" width="15%"/>
+        </Fragment>
+      )
+    else
+      return (
+        <Fragment>
+          { this.renderFrequencyTableButton() }
+          { this.renderFrequencyTable() }
+
+          { this.renderPageButtons() }
+          <PeopleTable people={this.state.people} nightMode={this.state.nightMode}/>
+          { this.renderPageButtons() }
+        </Fragment>
+      )
+  }
+
   render() {
     return (
       <div className="App" style={this.getAppStyle()}>
-        <button onClick={this.toggleNightMode} className={this.getNMBClass()}>
+        <button onClick={this.toggleNightMode} className={this.getNMBClass()} disabled={this.state.loading}>
           {this.state.nightMode ? "Disable" : "Enable"} Night Mode <Moon className="svg-align"/>
         </button>
 
@@ -119,22 +141,16 @@ export default class App extends React.Component {
         <br/>
 
         <div className="options-container">
-          <form onSubmit={this.changePerPage}>
-            <label>{ this.state.new_per_page } items per page</label>
-            <br/>
-            <input type="range" name="per_page" min="1" max="100" value={this.state.new_per_page} onChange={this.setNewPerPage}/>
-            <br/>
-            <button type="submit" className="blue-btn">Apply</button>
-          </form>
+          <label>{ this.state.new_per_page } items per page</label>
+          <br/>
+          <input type="range" name="per_page" min="1" max="100" value={this.state.new_per_page} onChange={this.changeNewPerPage}/>
+          <br/>
+          <button disabled={this.state.loading} className="blue-btn apply" onClick={()=> this.fetchPeople(1, this.state.new_per_page)}>Apply</button>
         </div>
         <br/>
 
-        { this.renderFrequencyTableButton() }
-        { this.renderFrequencyTable() }
+        { this.getTables() }
 
-        { this.renderPageButtons() }
-        <PeopleTable people={this.state.people} nightMode={this.state.nightMode}/>
-        { this.renderPageButtons() }
       </div>
     )
   }

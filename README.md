@@ -1,68 +1,31 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### 3. Build a simple web app
 
-## Available Scripts
+In this last part you will submit a web application with two features:
 
-In the project directory, you can run:
+1. Show a list of People records that are available via the [SalesLoft API](https://developers.salesloft.com/api.html#!/People/get_v2_people_json) using the API key in the email you received. Display each person’s name, email address, and job title.
+2. Create a button that, when clicked, displays a frequency count of all the **unique** characters in all the email addresses of all the People you have access to, sorted by frequency count.
 
-### `npm start`
+| Character | Count |
+| --------- | ----- |
+| M         | 7     |
+| R         | 5     |
+| S         | 2     |
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+At SalesLoft we love building quality software and we like to write code other people enjoy working with. Here are the elements we consider important:
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+- Usability. Having a working application is the first step, right?
+- Deployment. It would be cool to use the application in the cloud!
+- Documentation. Instructions are important and we want to see the reasons behind your development choices.
+- Tests. A test written today is 10 bugs that will not pop up tomorrow!
+- Git. Commit soon and commit often. Branches make cooperative work way easier.
+- Readability. Code should be written for other people to work on: names, indentation, spaces. Everything matters.
+- Frontend frameworks. Do you know any of the numerous frameworks out there? Are you using your choice to your advantage?
+- Development principles. There are different ways to write code. The important thing is doing it deliberately.
 
-### `npm test`
+Remember, what you learn during these exercises is more important than what you knew before starting!
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If you have any questions, email us at engineeringjobs@salesloft.com.
 
-### `npm run build`
+Good Luck!
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+The SalesLoft Team

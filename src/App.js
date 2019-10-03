@@ -20,19 +20,16 @@ export default class App extends React.Component {
   }
 
   componentDidMount() {
-    // this.fetchPeople()
+    this.fetchPeople()
   }
 
-  toggleDarkMode = ()=> {
-    this.setState({ darkMode: !this.state.darkMode })
-  }
-
-  fetchPeople = () => {
+  fetchPeople = (pageNum = 1) => {
     let full_url = [
       proxy_url,
       SL_People_url,
-      `?page=${this.state.page}`,
-      `&per_page=${this.state.per_page}`
+      `?page=${pageNum}`,
+      `&per_page=${this.state.per_page}`,
+      "&sorting=created_at"
     ].join('')
 
     fetch(full_url, {
@@ -45,31 +42,50 @@ export default class App extends React.Component {
     })
     .then(res => res.json())
     .then(res => {
-      // console.log(res)
       if (res.data) {
         this.setState({ 
           people: res.data, 
+          page: res.metadata.paging.current_page,
           next_page: res.metadata.paging.next_page
         }) 
       }
     })
   }
 
-  getStyle = () => ( this.state.darkMode ? { backgroundColor: "black" } : {} )
+  changePerPage = e => {
+    let newState = { per_page: e.target.value }
+    if (newState.per_page * this.state.page > 346)
+      newState.page = 1
 
-  handleChange = e => this.setState({ [e.target.name]: e.target.value })
-
-  refetch = () => {
-    this.setState({ page: 1, showCharStats: false })
-    this.fetchPeople()
+    this.setState(newState)
   }
 
-  fetchPage = increment => {
-    this.setState({ page: this.state.page + increment })
-    this.fetchPeople()
+  toggleDarkMode = () => this.setState({ darkMode: !this.state.darkMode })
+
+  getStyle = () => ( this.state.darkMode ? { backgroundColor: "black" } : {} )
+
+  renderPageButtons = () => {
+    return (
+      <div className="page-btn-container">
+        <button 
+        className="blue-btn page-btn" 
+        onClick={()=> this.fetchPeople(this.state.page - 1)} 
+        disabled={ this.state.page <= 1 }>
+          <PrevArrow className="svg-align"/>&nbsp;Previous
+        </button>
+
+        <button 
+        className="blue-btn page-btn" 
+        onClick={()=> this.fetchPeople(this.state.page + 1)} 
+        disabled={!this.state.next_page }>
+          Next&nbsp;<NextArrow className="svg-align"/>
+        </button>
+      </div>
+    )
   }
 
   render() {
+    console.log(this.state.page)
     return (
       <div className="App" style={this.getStyle()}>
         <img className="banner" src={SalesLoft_banner} alt="SalesLoft-Banner" draggable="false" />
@@ -81,18 +97,12 @@ export default class App extends React.Component {
 
           <label>{ this.state.per_page } items per page</label>
           <br/>
-          <input type="range" name="per_page" min="1" max="100" value={this.state.per_page} onChange={this.handleChange}/>
-
-          <br/>
-          <button className="blue-btn submit" onClick={this.refetch}>Fetch!</button>
+          <input type="range" name="per_page" min="1" max="100" value={this.state.per_page} onChange={this.changePerPage}/>
         </div>
 
-        <div className="page-btn-container">
-          <button onClick={()=> this.fetchPage(-1)} disabled={ this.state.page <= 1 }><PrevArrow/></button>
-          <button onClick={()=> this.fetchPage(+1)} disabled={!this.state.next_page }><NextArrow/></button>
-        </div>
-
+        { this.renderPageButtons() }
         <PeopleTable darkMode={this.state.darkMode} people={this.state.people}/>
+        { this.renderPageButtons() }
       </div>
     )
   }

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Table } from 'react-bootstrap'
 import { IoIosArrowUp as UpArrow, IoIosArrowDown as DownArrow } from 'react-icons/io'
+import '../stylesheets/PeopleTable.scss'
 
 
 const categories = [
@@ -34,10 +35,10 @@ export default class PeopleTable extends React.Component {
 
 	renderTableHeading = (category, index) => {
 		let icon = null
-		let className = ""
+		let className = "table-heading"
 
 		if (category.attribute === this.state.sort) {
-			className += "active-col"
+			className += " active-col"
 			if (this.state.order === -1)
 				icon = <UpArrow className="svg-align" />
 			else
@@ -45,10 +46,9 @@ export default class PeopleTable extends React.Component {
 		}
 
 		return (
-			<th key={index} className={className}>
-				<span className="table-heading" onClick={()=> this.handleColumnClick(category.attribute)}>
-					{category.display} {icon}
-				</span>
+			<th key={index} className={className} onClick={()=> this.handleColumnClick(category.attribute)}>
+				{category.display} {icon}
+				<div className="bottom"></div>
 			</th>
 		)
 	}

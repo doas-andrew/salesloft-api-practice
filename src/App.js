@@ -1,7 +1,6 @@
 import React, { Fragment } from 'react';
 import FrequencyTable from './components/FrequencyTable';
 import PeopleTable from './components/PeopleTable';
-import { key } from './api_key';
 import { proxy_url, SL_People_url, total_records } from './constants';
 import { IoIosArrowForward as NextArrow, IoIosArrowBack as PrevArrow } from 'react-icons/io';
 import { WiMoonAltWaningCrescent4 as Moon } from "react-icons/wi"
@@ -10,6 +9,8 @@ import SalesLoft_banner from './images/SalesLoft_banner.png';
 import './stylesheets/Table.scss';
 import './stylesheets/App.scss';
 
+
+const key = process.env.REACT_APP_SALESLOFT_API_KEY
 
 export default class App extends React.Component {
 
@@ -31,7 +32,7 @@ export default class App extends React.Component {
     this.fetchPeople()
   }
 
-  fetchPeople = (pageNum = 1, per_page=this.state.per_page) => {
+  fetchPeople = (pageNum = 1, per_page = this.state.per_page) => {
     this.setState({ loading: true })
     let full_url = [
       proxy_url,
@@ -114,7 +115,7 @@ export default class App extends React.Component {
           { this.renderFrequencyTableButton() }
 
           { this.renderPageButtons() }
-          <ReactLoading className="loading" type="spin" color="#2897D3" width="15%"/>
+          <ReactLoading className="loading" type="spokes" color="#2897D3" width="15%"/>
         </Fragment>
       )
     else
@@ -131,6 +132,7 @@ export default class App extends React.Component {
   }
 
   render() {
+    console.log('rendered...')
     return (
       <div className="App" style={this.getAppStyle()}>
         <button onClick={this.toggleNightMode} className={this.getNMBClass()} disabled={this.state.loading}>

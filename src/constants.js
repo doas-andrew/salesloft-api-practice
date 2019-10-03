@@ -8,7 +8,7 @@ export const defaultCount = { a:0, b:0, c:0, d: 0, e: 0, f: 0, g: 0, h: 0, i: 0,
 export const frequency_categories = [ "Character", "Count" ]
 
 export const people_categories = [
-  { display: "ID", attribute: "id"},
+  { display: "id", attribute: "id"},
   { display: "Name", attribute: "last_name"},
   { display: "Email", attribute: "email_address"},
   { display: "Job Title", attribute: "title"}

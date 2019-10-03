@@ -63,7 +63,7 @@ export default class PeopleTable extends React.Component {
 			this.setState({ sort: column, order: -1 })
 	}
 
-	getClassName = ()=> this.props.nightMode ? "people-table table-dark" : "people-table"
+	getClassName = ()=> ( this.props.nightMode ? "people-table table-dark" : "people-table" )
 
 
 	render() {

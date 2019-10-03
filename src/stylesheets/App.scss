@@ -14,10 +14,43 @@ $blue: rgb(40, 151, 211);
 .night-mode-btn {
 	position: absolute;
 	left: 0;
+	width: 180px;
+
+	border: none;
+  border-right: 1px solid white;
+  border-bottom: 1px solid white;
+  border-bottom-right-radius: 12px;
+	outline: none;
+	&:focus { outline: none; }
+
+	transition: 0.20s;
+}
+
+.nm-off {
+	color: black;
+	background-color: white;
+	border-color: white;
+	&:hover { border-color: black; }
+	&:active {
+		color: white;
+		background-color: black;
+	}
+}
+
+.nm-on {
+	color: white;
+	background-color: black;
+	border-color: black;
+	&:hover { border-color: white; }
+	&:active {
+		color: black;
+		background-color: white;
+	}
 }
 
 .banner {
   max-width: 40vw;
+  margin-top: 20px;
 }
 
 .options-container {

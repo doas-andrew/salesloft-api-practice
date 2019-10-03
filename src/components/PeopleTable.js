@@ -68,7 +68,7 @@ export default class PeopleTable extends React.Component {
 
 	render() {
 		return (
-			<Table striped hover className={this.getClassName()}>
+			<Table striped hover bordered className={this.getClassName()}>
 				<thead className="table-head">
 					<tr>
 					{ this.renderTableHeadings() }

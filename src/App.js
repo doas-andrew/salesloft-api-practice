@@ -38,7 +38,6 @@ export default class App extends React.Component {
     ].join('')
 
     fetch(full_url, {
-      method: "GET",
       headers: { 
         Authorization: `Bearer ${key}`,
         "Content-Type": "application/json",
@@ -57,16 +56,13 @@ export default class App extends React.Component {
     })
   }
 
-  setNewPerPage = e => this.setState({ new_per_page: e.target.value })
-  changePerPage = e => {
-    e.preventDefault(1, this.state.new_per_page)
-    this.setState({ per_page: this.state.new_per_page })
-    this.fetchPeople()
-  }
+  getAppStyle = () => ( this.state.nightMode ? { backgroundColor: "black" } : {} )
 
   toggleNightMode = () => this.setState({ nightMode: !this.state.nightMode })
 
-  getStyle = () => ( this.state.nightMode ? { backgroundColor: "black" } : {} )
+  getNMBClass = () => this.state.nightMode ? "night-mode-btn nm-on" : "night-mode-btn nm-off"
+
+  setNewPerPage = e => this.setState({ new_per_page: e.target.value })
 
   renderPageButtons = () => {
     return (
@@ -87,6 +83,12 @@ export default class App extends React.Component {
       </div>
     )
   }
+  
+  changePerPage = e => {
+    e.preventDefault(1, this.state.new_per_page)
+    this.setState({ per_page: this.state.new_per_page })
+    this.fetchPeople()
+  }
 
   toggleFrequencyTable = ()=> this.setState({ showFrequencyTable: !this.state.showFrequencyTable })
 
@@ -106,11 +108,9 @@ export default class App extends React.Component {
   }
 
   render() {
-    // let asdf = {c:2, b:1, a:3}
-    // console.log(Object.keys(asdf))
     return (
-      <div className="App" style={this.getStyle()}>
-        <button onClick={this.toggleNightMode} className="night-mode-btn">
+      <div className="App" style={this.getAppStyle()}>
+        <button onClick={this.toggleNightMode} className={this.getNMBClass()}>
           {this.state.nightMode ? "Disable" : "Enable"} Night Mode <Moon className="svg-align"/>
         </button>
 

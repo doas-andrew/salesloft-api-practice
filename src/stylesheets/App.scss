@@ -11,9 +11,13 @@ $blue: rgb(40, 151, 211);
   transition: background-color 1s;
 }
 
+.night-mode-btn {
+	position: absolute;
+	left: 0;
+}
+
 .banner {
   max-width: 40vw;
-  margin-top: 50px;
 }
 
 .options-container {

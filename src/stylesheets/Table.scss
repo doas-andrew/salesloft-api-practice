@@ -1,9 +1,16 @@
 $blue: rgb(40, 151, 211);
 
+.frequency-table {
+  width: 500px;
+  margin: 50px auto;
+  transition: 2s;
+}
+
 .people-table {
 	margin: 0;
 	padding: 0;
 	border-bottom: 1px solid grey;
+  transition: 2s;
 }
 
 .table-heading {
@@ -25,9 +32,6 @@ $blue: rgb(40, 151, 211);
 
   transform: scaleX(0);
   transition: transform 0.20s ease;
-}
-
-.th-text {
 }
 
 .active-col {

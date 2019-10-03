@@ -147,7 +147,13 @@ export default class App extends React.Component {
           <br/>
           <input type="range" name="per_page" min="1" max="100" value={this.state.new_per_page} onChange={this.changeNewPerPage}/>
           <br/>
-          <button disabled={this.state.loading} className="blue-btn apply" onClick={()=> this.fetchPeople(1, this.state.new_per_page)}>Apply</button>
+
+          <button 
+          className="blue-btn apply"
+          disabled={this.state.loading || this.state.per_page == this.state.new_per_page} 
+          onClick={()=> this.fetchPeople(1, this.state.new_per_page)}>
+            Apply
+          </button>
         </div>
         <br/>
 

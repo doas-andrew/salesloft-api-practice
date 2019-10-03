@@ -15,6 +15,32 @@ $blue: #2897D3;
 	margin: 40px auto 0px;
 }
 
+.links-container {
+	position: absolute;
+	right: 0;
+	top: 10px;
+}
+
+.link {
+	margin-right: 20px;
+}
+
+.github-icon {
+	width: 80px;
+	height: 80px;
+}
+
+.asallen-icon {
+	width: 56px;
+	height: 56px;
+	border-radius: 100%;
+}
+
+.linkedin-icon {
+	width: 56px;
+	height: 56px;
+}
+
 .night-mode-btn {
 	position: absolute;
 	left: 0;

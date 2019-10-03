@@ -132,7 +132,6 @@ export default class App extends React.Component {
   }
 
   render() {
-    console.log('rendered...')
     return (
       <div className="App" style={this.getAppStyle()}>
         <button onClick={this.toggleNightMode} className={this.getNMBClass()} disabled={this.state.loading}>

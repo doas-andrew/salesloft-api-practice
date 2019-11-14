@@ -4,8 +4,6 @@ import { IoIosArrowUp as UpArrow, IoIosArrowDown as DownArrow } from 'react-icon
 import { people_categories } from '../constants'
 
 
-
-
 export default class PeopleTable extends React.Component {
 
 	state = {

@@ -11,14 +11,10 @@ $blue: #2897D3;
   transition: background-color 1s;
 }
 
-.loading {
-	margin: 40px auto 0px;
-}
 
-.links-container {
-	position: absolute;
-	right: 0;
-	top: 10px;
+.top-container {
+	display: flex;
+	justify-content: space-between;
 }
 
 .link {
@@ -51,6 +47,7 @@ $blue: #2897D3;
 .night-mode-btn {
 	position: absolute;
 	left: 0;
+	top: 0;
 	width: 180px;
 
 	border: none;
@@ -87,7 +84,7 @@ $blue: #2897D3;
 
 .banner {
   max-width: 40vw;
-  margin-top: 20px;
+  // margin-top: 20px;
 }
 
 .options-container {
